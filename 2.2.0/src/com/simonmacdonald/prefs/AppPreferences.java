@@ -22,7 +22,10 @@ public class AppPreferences extends CordovaPlugin {
     private static final String LOG_TAG = "AppPrefs";
     private static final int NO_PROPERTY = 0;
     private static final int NO_PREFERENCE_ACTIVITY = 1;
-
+	
+	private static final int SHOW_PREFERENCEACTIVITY_INTENT = 1;
+    private CallbackContext auxCtx;
+    
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
         PluginResult.Status status = PluginResult.Status.OK;
@@ -50,23 +53,15 @@ public class AppPreferences extends CordovaPlugin {
                 }
                 callbackContext.sendPluginResult(new PluginResult(status, editor.commit()));               
             } else if (action.equals("load")) {
-                JSONObject obj = new JSONObject();
-                Map prefs = sharedPrefs.getAll();
-                Iterator it = prefs.entrySet().iterator();
-                while (it.hasNext()) {
-                    Map.Entry pairs = (Map.Entry)it.next();
-                    obj.put(pairs.getKey().toString(), pairs.getValue().toString());
-                }
-                callbackContext.sendPluginResult(new PluginResult(status, obj));
-            } else if (action.equals("show")) {
+            	
+				this.load(callbackContext);
+
+			} else if (action.equals("show")) {
+            	auxCtx = callbackContext;
                 String activityName = args.getString(0);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setClassName(this.cordova.getActivity(), activityName);
-                try {
-                    this.cordova.getActivity().startActivity(intent);
-                } catch (ActivityNotFoundException e) {
-                    callbackContext.sendPluginResult(createErrorObj(NO_PREFERENCE_ACTIVITY, "No preferences activity called " + activityName));
-                }
+				
+				this.show(activityName, callbackContext);
+                        
             } else if (action.equals("clear")) {
             	Editor editor = sharedPrefs.edit();
             	editor.clear();
@@ -90,6 +85,52 @@ public class AppPreferences extends CordovaPlugin {
         return false;
     }
 
+	private void load(CallbackContext callbackContext) {
+
+		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.cordova.getActivity());
+		Map map = sharedPrefs.getAll();
+		Iterator entries = map.entrySet().iterator();
+		JSONObject response = new JSONObject();
+		while(entries.hasNext()) {
+			Map.Entry entry = (Map.Entry) entries.next();
+			String key = (String)entry.getKey();
+		    String value = (String)entry.getValue();
+		    
+		    try {
+				response.put(key, value);
+			} catch (JSONException e) {
+				continue;
+			}
+		}
+	 	callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, response));	
+	}
+	
+	private void show(String prefActivity, CallbackContext callbackContext) {
+    	
+		String activityClass = prefActivity;
+		auxCtx = callbackContext;
+		
+		try {
+    		Class a = Class.forName(activityClass);
+    		 
+    		Intent intent = new Intent(this.cordova.getActivity(), a);
+    		intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+    		   			
+    		this.cordova.startActivityForResult(this, intent, SHOW_PREFERENCEACTIVITY_INTENT);
+    		 
+    	} catch( ClassNotFoundException e ) {
+    		callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "No preferences activity called " + prefActivity));			
+    	}	  
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    	
+	    if(requestCode == SHOW_PREFERENCEACTIVITY_INTENT) {
+	    	this.load(auxCtx);		
+		}
+    }
+    
     private PluginResult createErrorObj(int code, String message) throws JSONException {
         JSONObject errorObj = new JSONObject();
         errorObj.put("code", code);
