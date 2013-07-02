@@ -1,6 +1,10 @@
 # Application Preferences plugin for Phonegap #
 Originally by Simon MacDonald (@macdonst)
 
+Please note that the following steps are for PhoneGap 2.0
+
+Information on writing plugins for PhoneGap 2.0 was taken from [this blog](http://simonmacdonald.blogspot.com/2012/08/so-you-wanna-write-phonegap-200-android.html) by Simon MacDonald (@macdonst)
+
 ## Adding the Plugin to your project ##
 
 1) To install the plugin, move applicationPreferences.js to your project's www folder and include a reference to it in your html files.
@@ -14,12 +18,17 @@ Originally by Simon MacDonald (@macdonst)
 
 `cp ./src/com/simonmacdonald/prefs/AppPreferences.java <your_project>/src/com/simonmacdonald/prefs`
 
-4) In your res/xml/plugins.xml file add the following line:
+4) In your `res/xml/config.xml` file add the following element as a child to the `<plugins>` element.
 
-    `<plugin name="applicationPreferences" value="com.simonmacdonald.prefs.AppPreferences"/>`
+   `<plugin name="applicationPreferences" value="com.simonmacdonald.prefs.AppPreferences"/>`
 
 ## Using the plugin ##
-The plugin creates the object `window.plugins.applicationPreferences`
+
+Create an object to be used to call the defined plugin methods.
+
+    var preferences = cordova.require("cordova/plugin/applicationpreferences");
+
+The `preferences` object created above will be used in the following examples.
 
 ### get ###
 
@@ -34,7 +43,11 @@ In order to get the value a property you would call the get method.
 
 Sample use:
 
-    window.plugins.applicationPreference.get("key", success, fail);
+    preferences.get("myKey", function(value) {
+			alert("Value is " + value);
+		}, function(error) {
+			alert("Error! " + JSON.stringify(error));
+	});
 
 ### set ###
 
@@ -50,7 +63,49 @@ In order to set the value a property you would call the set method.
 
 Sample use:
 
-    window.plugins.applicationPreference.set("key", "value", success, fail);
+    preferences.set("myKey", "myValue", function() {
+			alert("Successfully saved!");
+		}, function(error) {
+			alert("Error! " + JSON.stringify(error));
+	});
+
+
+### remove ###
+
+In order to remove a key along with the value, you would call the remove method.
+
+    /**
+	  * Remove the key along with the value
+	  *
+	  * @param key      
+      */
+     remove(key, success, fail)
+
+Sample use:
+
+		preferences.remove("myKey", function(value) {
+			alert("Value removed!");
+		}, function(error) {
+			alert("Error! " + JSON.stringify(error));
+		});
+
+### clear ###
+
+In order to remove all shared preferences, you would call the clear method.
+
+     /**
+	  * Clear all shared preferences
+	  *	       
+	  */
+     clear(success, fail)
+
+Sample use:
+
+		preferences.clear(function() {
+			alert("Cleared all preferences!");
+		}, function(error) {
+			alert("Error! " + JSON.stringify(error));
+		});
 
 ### load ###
 
@@ -64,7 +119,11 @@ In order to get all the properties you can call the load method. The success cal
 
 Sample use:
 
-    window.plugins.applicationPreference.load(success, fail);
+    preferences.load(function(prefs) {
+			alert(JSON.stringify(prefs));
+		}, function() {
+			alert("Error! " + JSON.stringify(error));
+	});
 
 ### show ###
 
@@ -78,7 +137,13 @@ If you want to load the PreferenceActivity of your application that displays all
 
 Sample use:
     
-    window.plugins.applicationPreference.show("com.simonmacdonald.prefs.PreferenceActivity", success, fail);
+    function showPreferenceActivity() {
+		preferences.show("com.ranhiru.apppreferences.PreferenceActivity", function() {
+			alert("Showing Preferences Activity!");
+		}, function(error) {
+			alert("Error! " + JSON.stringify(error));
+		});
+	  }
 	
 ## Licence ##
 
