@@ -8,8 +8,8 @@
   </engines>
 
   <name>Android Preferences Access Plugin</name>
-  <js-module src="applicationPreferences.js" name="preferences">
-	      <clobbers target="preferences" />
+  <js-module src="applicationPreferences.js" name="applicationPreferences">
+	      <clobbers target="applicationPreferences" />
   </js-module>
   <platform name="android">
 	  <source-file src="src/com/simonmacdonald/prefs/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
