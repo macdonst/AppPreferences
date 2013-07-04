@@ -1,34 +1,19 @@
 # Application Preferences plugin for Phonegap #
-Originally by Simon MacDonald (@macdonst)
-
-Please note that the following steps are for PhoneGap 2.0
+Originally by Simon MacDonald (@macdonst), ported to plugman and some other cleanup by Dan Moore (@mooreds)
 
 Information on writing plugins for PhoneGap 2.0 was taken from [this blog](http://simonmacdonald.blogspot.com/2012/08/so-you-wanna-write-phonegap-200-android.html) by Simon MacDonald (@macdonst)
 
-## Adding the Plugin to your project ##
+## Install
 
-1) To install the plugin, move applicationPreferences.js to your project's www folder and include a reference to it in your html files.
+This plugin uses [plugman](https://github.com/apache/cordova-plugman)
 
-`<script type="text/javascript" charset="utf-8" src="applicationPreferences.js"></script>`
-
-2) Create a folder called 'com/simonmacdonald/prefs' within your project's src folder.
-3) And copy the AppPreferences.java file into that new folder.
-
-`mkdir <your_project>/src/com/simonmacdonald/prefs`
-
-`cp ./src/com/simonmacdonald/prefs/AppPreferences.java <your_project>/src/com/simonmacdonald/prefs`
-
-4) In your `res/xml/config.xml` file add the following element as a child to the `<plugins>` element.
-
-   `<plugin name="applicationPreferences" value="com.simonmacdonald.prefs.AppPreferences"/>`
+`cordova plugins add https://github.com/8zrealestate/AppPreferences`
 
 ## Using the plugin ##
 
-Create an object to be used to call the defined plugin methods.
+There will be a window.applicationPreferences object defined after the plugin is installed.
 
-    var preferences = cordova.require("cordova/plugin/applicationpreferences");
-
-The `preferences` object created above will be used in the following examples.
+The `applicationPreferences` object created above will be used in the following examples.
 
 ### get ###
 
@@ -43,7 +28,7 @@ In order to get the value a property you would call the get method.
 
 Sample use:
 
-    preferences.get("myKey", function(value) {
+    window.applicationPreferences.get("myKey", function(value) {
 			alert("Value is " + value);
 		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
@@ -63,7 +48,7 @@ In order to set the value a property you would call the set method.
 
 Sample use:
 
-    preferences.set("myKey", "myValue", function() {
+    window.applicationPreferences.set("myKey", "myValue", function() {
 			alert("Successfully saved!");
 		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
@@ -83,7 +68,7 @@ In order to remove a key along with the value, you would call the remove method.
 
 Sample use:
 
-		preferences.remove("myKey", function(value) {
+		window.applicationPreferences.remove("myKey", function(value) {
 			alert("Value removed!");
 		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
@@ -101,7 +86,7 @@ In order to remove all shared preferences, you would call the clear method.
 
 Sample use:
 
-		preferences.clear(function() {
+		window.applicationPreferences.clear(function() {
 			alert("Cleared all preferences!");
 		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
@@ -119,7 +104,7 @@ In order to get all the properties you can call the load method. The success cal
 
 Sample use:
 
-    preferences.load(function(prefs) {
+    window.applicationPreferences.load(function(prefs) {
 			alert(JSON.stringify(prefs));
 		}, function() {
 			alert("Error! " + JSON.stringify(error));
@@ -138,33 +123,10 @@ If you want to load the PreferenceActivity of your application that displays all
 Sample use:
     
     function showPreferenceActivity() {
-		preferences.show("com.ranhiru.apppreferences.PreferenceActivity", function() {
+		window.applicationPreferences.show("com.ranhiru.apppreferences.PreferenceActivity", function() {
 			alert("Showing Preferences Activity!");
 		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
 		});
 	  }
 	
-## Licence ##
-
-The MIT License
-
-Copyright (c) 2012 Simon MacDonald
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
