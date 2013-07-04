@@ -1,4 +1,3 @@
-cordova.define("cordova/plugin/applicationpreferences", function(require, exports, module) {
 	var exec = require("cordova/exec");
 	var AppPreferences = function () {};
 	
@@ -36,11 +35,3 @@ cordova.define("cordova/plugin/applicationpreferences", function(require, export
 
 	var appPreferences = new AppPreferences();
 	module.exports = appPreferences;
-});
-
-if (!window.plugins) {
-    window.plugins = {};
-}
-if (!window.plugins.applicationPreference) {
-    window.plugins.applicationPreference = cordova.require("cordova/plugin/applicationpreferences");
-}
