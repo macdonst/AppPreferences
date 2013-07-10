@@ -15,7 +15,9 @@
 	  <source-file src="src/com/simonmacdonald/prefs/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
 
 	  <config-file target="res/xml/config.xml" parent="/widget">
-		  <feature name="applicationPreferences" value="com.simonmacdonald.prefs.AppPreferences"/>
-    </config-file>
+	      <feature name="applicationPreferences">
+	          <param name="android-package" value="com.simonmacdonald.prefs.AppPreferences" />
+	      </feature>
+          </config-file>
   </platform>
 </plugin>
