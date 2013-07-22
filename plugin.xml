@@ -26,7 +26,9 @@
           </js-module>
 		
         <config-file target="config.xml" parent="plugins">
-            <plugin name="com.simonmacdonald.prefs.applicationPreferences" value="applicationPreferences" />
+		<feature name="com.simonmacdonald.prefs.applicationPreferences">
+        		<param name="ios-package" value="applicationPreferences" />
+    		</feature>
         </config-file>
 
         <header-file src="src/ios/applicationPreferences.h" />
