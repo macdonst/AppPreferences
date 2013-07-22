@@ -6,12 +6,12 @@
   <engines>
     <engine name="cordova" version=">=2.9.0" />
   </engines>
+          <js-module src="src/ios/www/applicationPreferences.js" name="applicationPreferences">
+	      <clobbers target="applicationPreferences" />
+          </js-module>
 
   <name>Preferences Access Plugin</name>
   <platform name="android">
-          <js-module src="src/android/www/applicationPreferences.js" name="applicationPreferences">
-	      <clobbers target="applicationPreferences" />
-          </js-module>
 	  <source-file src="src/android/com/simonmacdonald/prefs/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
 
 	  <config-file target="res/xml/config.xml" parent="/widget">
@@ -21,9 +21,6 @@
           </config-file>
   </platform>
     <platform name="ios">
-          <js-module src="src/ios/www/applicationPreferences.js" name="applicationPreferences">
-	      <clobbers target="applicationPreferences" />
-          </js-module>
 		
         <config-file target="config.xml" parent="plugins">
 		<feature name="applicationPreferences">
