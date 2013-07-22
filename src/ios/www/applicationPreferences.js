@@ -1,7 +1,5 @@
-(function() {
-  
-function applicationPreferences() {}
-
+	var exec = require("cordova/exec");
+	var applicationPreferences = function () {};
 applicationPreferences.prototype.get = function(key,success,fail) 
 {
     var args = {};
@@ -17,13 +15,4 @@ applicationPreferences.prototype.set = function(key,value,success,fail)
     cordova.exec(success,fail,"applicationPreferences","setSetting",[args]);
 };
 
-
-if(!window.plugins) {
-    window.plugins = {};
-}
-if ( ! window.plugins.applicationPreferences ) {
-    window.plugins.applicationPreferences = new applicationPreferences();
-}
-
-})();
 
