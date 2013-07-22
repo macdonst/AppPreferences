@@ -20,7 +20,7 @@
 	NSString* jsString;
 
         NSDictionary *options   = [command.arguments objectAtIndex:0];
-    		NSString *settingsName = [options objectForKey:@"key"];
+    	NSString *settingsName = [options objectForKey:@"key"];
         CDVPluginResult* result = nil;
 	
 		@try 
@@ -57,7 +57,7 @@
 
     NSDictionary *options   = [command.arguments objectAtIndex:0];
     NSString *settingsName = [options objectForKey:@"key"];
-    NSString *settingsName = [options objectForKey:@"value"];
+    NSString *settingsValue = [options objectForKey:@"value"];
 
 		
     @try 
