@@ -14,13 +14,13 @@
 
 
 
-- (void)getSetting:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
+- (void)getSetting:(CDVInvokedUrlCommand*)command
 {
-	NSString* callbackID = [arguments pop];
+        NSString* callbackID = command.callbackId;
 	NSString* jsString;
 
         
-		NSString *settingsName = [options objectForKey:@"key"];
+    		NSString *settingsName = [command.arguments objectForKey:@"key"];
         CDVPluginResult* result = nil;
 	
 		@try 
@@ -49,14 +49,14 @@
 		}
 }
 
-- (void)setSetting:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
+- (void)setSetting:(CDVInvokedUrlCommand*)command
 {
-    NSString* callbackID = [arguments pop];
+    NSString* callbackID = command.callbackId;
 	NSString* jsString;    
     CDVPluginResult* result;
 
-    NSString *settingsName = [options objectForKey:@"key"];
-    NSString *settingsValue = [options objectForKey:@"value"];
+    NSString *settingsName = [command.arguments objectForKey:@"key"];
+    NSString *settingsValue = [command.arguments objectForKey:@"value"];
 
 		
     @try 
