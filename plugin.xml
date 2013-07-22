@@ -26,9 +26,9 @@
           </js-module>
 		
         <config-file target="config.xml" parent="plugins">
-            <feature name="applicationPreferences">
+            <plugin name="applicationPreferences">
 		  <param name="ios-package" value="applicationPreferences" />
-	    </feature>
+	    </plugin>
         </config-file>
 
         <header-file src="src/ios/applicationPreferences.h" />
