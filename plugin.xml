@@ -25,8 +25,10 @@
 	      <clobbers target="applicationPreferences" />
           </js-module>
 		
-        <config-file target="config.xml" parent="widget">
-            <plugin name="src/ios/www/applicationPreferences" value="applicationPreferences"/>
+        <config-file target="config.xml" parent="/widget">
+            <feature name="applicationPreferences">
+		  <param name="ios-package" value="applicationPreferences" />
+	    </feature>
         </config-file>
 
         <header-file src="src/ios/applicationPreferences.h" />
