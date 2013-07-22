@@ -19,8 +19,8 @@
         NSString* callbackID = command.callbackId;
 	NSString* jsString;
 
-        
-    		NSString *settingsName = [command.arguments objectForKey:@"key"];
+        NSDictionary *options   = [command.arguments objectAtIndex:0];
+    		NSString *settingsName = [options objectForKey:@"key"];
         CDVPluginResult* result = nil;
 	
 		@try 
@@ -55,8 +55,9 @@
 	NSString* jsString;    
     CDVPluginResult* result;
 
-    NSString *settingsName = [command.arguments objectForKey:@"key"];
-    NSString *settingsValue = [command.arguments objectForKey:@"value"];
+    NSDictionary *options   = [command.arguments objectAtIndex:0];
+    NSString *settingsName = [options objectForKey:@"key"];
+    NSString *settingsName = [options objectForKey:@"value"];
 
 		
     @try 
