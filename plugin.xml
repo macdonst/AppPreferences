@@ -27,7 +27,7 @@
 		
         <config-file target="config.xml" parent="plugins">
 		<feature name="applicationPreferences">
-        		<param name="ios-package" value="com.simonmacdonald.prefs.applicationPreferences" />
+        		<param name="ios-package" value="applicationPreferences" />
     		</feature>
         </config-file>
 
