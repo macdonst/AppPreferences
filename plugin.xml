@@ -23,7 +23,7 @@
     <platform name="ios">
 		
         <config-file target="config.xml" parent="plugins">
-		<feature name="applicationPreferences">
+		<feature name="com.simonmacdonald.prefs.applicationPreferences">
         		<param name="ios-package" value="applicationPreferences" />
     		</feature>
         </config-file>
