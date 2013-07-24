@@ -6,11 +6,11 @@
   <engines>
     <engine name="cordova" version=">=2.9.0" />
   </engines>
-          <js-module src="src/ios/www/applicationPreferences.js" name="applicationPreferences">
-	      <clobbers target="applicationPreferences" />
+  <name>Preferences Access Plugin</name>
+          <js-module src="src/ios/www/applicationPreferences.js" name="appref">
+	      <clobbers target="appref" />
           </js-module>
 
-  <name>Preferences Access Plugin</name>
   <platform name="android">
 	  <source-file src="src/android/com/simonmacdonald/prefs/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
 
