@@ -9,7 +9,7 @@
   <name>Preferences Access Plugin</name>
 
   <platform name="android">
- 	<js-module src="src/android/www/applicationPreferences.js" name="applicationPreferences">
+ 	<js-module src="src/android/applicationPreferences.js" name="applicationPreferences">
               <clobbers target="applicationPreferences" />
         </js-module>
 	  <source-file src="src/android/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
@@ -21,7 +21,7 @@
           </config-file>
   </platform>
     <platform name="ios">
- 	<js-module src="src/ios/www/applicationPreferences.js" name="applicationPreferences">
+ 	<js-module src="src/ios/applicationPreferences.js" name="applicationPreferences">
               <clobbers target="applicationPreferences" />
         </js-module>
 		
