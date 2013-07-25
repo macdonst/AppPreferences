@@ -23,9 +23,7 @@
     <platform name="ios">
 		
         <config-file target="config.xml" parent="/*/plugins">
-		<feature name="applicationPreferences">
-        		<param name="applicationPreferences" value="applicationPreferences" />
-    		</feature>
+		<plugin name="applicationPreferences" value="applicationPreferences" />
         </config-file>
 
         <config-file target="config.xml" parent="/widget">
