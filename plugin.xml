@@ -7,7 +7,7 @@
     <engine name="cordova" version=">=2.9.0" />
   </engines>
   <name>Preferences Access Plugin</name>
-          <asset src="src/ios/www/applicationPreferences.js" target="applicationPreferences.js" />
+          <asset src="src/www/applicationPreferences.js" target="applicationPreferences.js" />
 
   <platform name="android">
 	  <source-file src="src/android/com/simonmacdonald/prefs/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
@@ -24,13 +24,6 @@
 		<plugin name="applicationPreferences" value="applicationPreferences" />
         </config-file>
 
-<!--
-        <config-file target="config.xml" parent="/widget">
-		<feature name="applicationPreferences">
-        		<param name="ios-package" value="applicationPreferences" />
-    		</feature>
-        </config-file>
--->
         <header-file src="src/ios/applicationPreferences.h" />
 
         <source-file src="src/ios/applicationPreferences.m"  />
