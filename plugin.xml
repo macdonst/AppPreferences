@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="com.simonmacdonald.prefs"
+    version="1.0.0">
+  <engines>
+    <engine name="cordova" version=">=2.9.0" />
+  </engines>
+  <name>Preferences Access Plugin</name>
+
+  <platform name="android">
+ 	<js-module src="src/android/applicationPreferences.js" name="applicationPreferences">
+              <clobbers target="applicationPreferences" />
+        </js-module>
+	  <source-file src="src/android/AppPreferences.java" target-dir="src/com/simonmacdonald/prefs/" />
+
+	  <config-file target="res/xml/config.xml" parent="/widget">
+	      <feature name="applicationPreferences">
+	          <param name="android-package" value="com.simonmacdonald.prefs.AppPreferences" />
+	      </feature>
+          </config-file>
+  </platform>
+    <platform name="ios">
+ 	<js-module src="src/ios/applicationPreferences.js" name="applicationPreferences">
+              <clobbers target="applicationPreferences" />
+        </js-module>
+		
+        <config-file target="config.xml" parent="plugins">
+		<plugin name="applicationPreferences" value="applicationPreferences" />
+        </config-file>
+
+        <header-file src="src/ios/applicationPreferences.h" />
+
+        <source-file src="src/ios/applicationPreferences.m"  />
+
+    </platform>
+
+</plugin>
