@@ -121,7 +121,7 @@ Sample use:
 
     preferences.load(function(prefs) {
 			alert(JSON.stringify(prefs));
-		}, function() {
+		}, function(error) {
 			alert("Error! " + JSON.stringify(error));
 	});
 
